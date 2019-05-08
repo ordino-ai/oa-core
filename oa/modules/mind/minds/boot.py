@@ -10,6 +10,8 @@ command = command_registry(kws)
 @command("boot mind")
 def response_sound():
   play('r2d2.wav')
+  say('Loading Elsa')
+  mind('root')
 
 @command("open assistant")
 def open_root():
