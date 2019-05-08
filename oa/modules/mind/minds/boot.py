@@ -7,10 +7,10 @@ from oa.modules.abilities.interact import say, play, mind
 kws = {}
 command = command_registry(kws)
 
-@command("boot mind")
+@command("start elsa")
 def response_sound():
   play('r2d2.wav')
-  say('Loading Elsa')
+  say('Hello World, This is Elsa')
   mind('root')
 
 @command("open assistant")

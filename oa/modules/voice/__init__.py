@@ -4,14 +4,10 @@ import platform
 from io import BytesIO
 import os
 import pyttsx3
-from gtts import gTTS
 from oa.core import oa
 from oa.modules.abilities.core import get, put
-from pydub import AudioSegment
-from pydub.playback import play
-import tempfile
-import hashlib
 from playsound import playsound
+from oa.WaveRNN import say
 
 sys_os = platform.system()
 flMac = (sys_os == 'Darwin')
@@ -22,11 +18,6 @@ else:
 
 
 
-def genFilename(str: str, ext: str):
-    hashed= hashlib.md5(str.encode()) 
-    hexdigest = hashed.hexdigest()
-    hexdigest=hexdigest + ext
-    return hexdigest
 
 def _in():
     if not flMac:
@@ -44,22 +35,23 @@ def _in():
             _msg.stdout.close()
             _tts.communicate()
         else:
-            tempDir = tempfile.gettempdir()
-            filename = genFilename(s, '.mp3') 
-            filepath = os.path.join(tempDir, filename)
-            if not os.path.exists(filepath):
-                try:
-                    tts = gTTS(s, 'en')
-                    with open(filepath, 'wb') as f:
-                        tts.write_to_fp(f)
-                    print(f"Video Download: {filename}")
-                except:
-                    raise Exception('Failed to Download Video')
-            else:
-                print("Video already in cache")
+            say.say(s)
+            # tempDir = tempfile.gettempdir()
+            # filename = genFilename(s, '.mp3') 
+            # filepath = os.path.join(tempDir, filename)
+            # if not os.path.exists(filepath):
+            #     try:
+            #         tts = gTTS(s, 'en')
+            #         with open(filepath, 'wb') as f:
+            #             tts.write_to_fp(f)
+            #         print(f"Video Download: {filename}")
+            #     except:
+            #         raise Exception('Failed to Download Video')
+            # else:
+            #     print("Video already in cache")
 
-            playsound(filepath)
-            print(f"Writing to {filepath}")
+            # playsound(filepath)
+            # print(f"Writing to {filepath}")
             # song = AudioSegment.from_file(filepath, format="mp3")
             # p.play()
             # play(song)

@@ -8,14 +8,18 @@ kws = {}
 
 command = command_registry(kws)
 
-@command("root mind")
+@command(["hello elsa", "hi elsa"])
 def hello_world():
-     say('- Hello world!')
+     say('Hi William')
 
 @command("close assistant")
 def close_assistant():
     play('beep_close.wav')
     mind('boot')
+
+@command("who are you")
+def who():
+    say('Hi William, this is elsa')
 
 @command(["list commands", "what can i say"])
 def list_commands():
@@ -48,3 +52,7 @@ def what_weather():
 @command("what time is it")
 def what_time():
     say_time()
+
+@command(["thanks", "thank you"])
+def thank_you():
+     say("you're welcome, fucker")
